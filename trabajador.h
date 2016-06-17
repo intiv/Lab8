@@ -1,3 +1,4 @@
+#pragma once
 #include "robot.h"
 #include<string>
 
@@ -9,4 +10,4 @@ class trabajador: public robot{
 	virtual ~trabajador();
 	void funcion(double&,double&,int);
 	string toString()const;
-}
+};

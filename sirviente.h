@@ -1,3 +1,4 @@
+#pragma once
 #include "robot.h"
 #include<string>
 
@@ -13,4 +14,4 @@ class sirviente:public robot{
 	void setOxido(int);
 	void setOxido();
 	string toString()const;
-}
+};

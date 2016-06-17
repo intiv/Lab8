@@ -1,7 +1,10 @@
+#pragma once
 #include<string>
+
 using std::string;
 
 class robot{
+  protected:
 	double precio, amp;
 	string material, serie;
   public:
@@ -15,6 +18,6 @@ class robot{
 	void setAmp(double);
 	void setMaterial(string);
 	void setSerie(string);
-	void funcion(double&,double&,int)=0;
+	virtual void funcion(double&,double&,int)=0;
 	virtual string toString()const;
-}
+};
