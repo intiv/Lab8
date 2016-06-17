@@ -16,6 +16,9 @@ int main(int argc,char* argv[]){
 	vector<robot*> robots;
 	vector<robot*> myrobots;
 	bool continuar=true;
+	double money, amperaje;
+	money=15000;
+	amperaje=20000;
 	while(continuar){
 		int op=menu();
 		if(op==1){
@@ -41,6 +44,7 @@ int main(int argc,char* argv[]){
 			}
 			cout<<robots.at(robots.size()-1)->toString()<<" Fue agregado!\n"<<endl;
 		}else if(op==2){	
+			if(robots.size()>0){
 			listar(robots);	
 			int choose;
 			cout<<"Ingrese indice a modificar: ";
@@ -54,21 +58,55 @@ int main(int argc,char* argv[]){
 			robots.at(choose)->setPrecio(np);
 			robots.at(choose)->setAmp(na);
 		        cout<<"\nModificado: "<<robots.at(choose)->toString()<<endl;
+			}
 		}else if(op==3){
+			if(robots.size()>0){
 			listar(robots);	
 			int choose;
 			cout<<"Ingrese indice: ";
 			cin>>choose;
 			robots.erase(robots.begin()+choose);
-			cout<<"BORRADO"<<endl;		
+			cout<<"BORRADO"<<endl;
+			}		
 		}else if(op==4){
+			if(myrobots.size()>0){
+			cout<<"Dinero: "<<money<<endl<<endl;
 			listar(robots);
 			cout<<"Ingrese indice de robot a comprar: ";
 			int buy;
 			cin>>buy;
-			
+			if(robots.at(buy)->getPrecio()<=money){
+				money-=robots.at(buy)->getPrecio();
+				myrobots.push_back(robots.at(buy));
+				robots.erase(robots.begin()+buy);
+			}else{
+				cout<<"NO TIENE SUFICIENTE $$$$$$$$$$$"<<endl;
+			}
+			}	
 		}else if(op==5){
+			if(myrobots.size()>0&&money>0&&amperaje>0){
+				listar(myrobots);
+				int ind;
+				cout<<"Ingrese indice: ";
+				cin>>ind;
+				if(typeid(*myrobots.at(ind))==typeid(sirviente)){
+					myrobots.at(ind)->funcion(money,amperaje,myrobots.size());
+				}else if(typeid(*myrobots.at(ind))==typeid(trabajador)){
+					myrobots.at(ind)->funcion(money,amperaje,myrobots.size());
+				}else if(typeid(*myrobots.at(ind))==typeid(abastecedor)){
+					myrobots.at(ind)->funcion(money,amperaje,myrobots.size());
+				}
+			}else{
+				cout<<"NOT ENOUGH $$$ OR AMPS"<<endl;
+			}
 		}else if(op==6){
+			if(myrobots.size()>0){
+				listar(myrobots);
+				int ind;
+				cout<<"Ingrese indice: ";
+				cin>>ind;
+				myrobots.erase(myrobots.begin()+ind);
+			}
 		}else if(op==7){
 			continuar=false;
 		}
